@@ -169,7 +169,7 @@ public class UnboundedSourceSpout extends AbstractComponent implements IRichSpou
 
         WindowedValue wv =
             WindowedValue.of(value, timestamp, GlobalWindow.INSTANCE, PaneInfo.NO_FIRING);
-        LOG.debug("Source output: " + wv.getValue());
+        //LOG.debug("Source output: " + wv.getValue());
         if (keyedEmit(outputTag.getId())) {
           KV kv = (KV) wv.getValue();
           // Convert WindowedValue<KV> to <K, WindowedValue<V>>

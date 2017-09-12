@@ -235,7 +235,7 @@ class DoFnExecutor<InputT, OutputT> implements Executor {
   }
 
   protected void processSideInput(TupleTag tag, WindowedValue elem) {
-    LOG.debug("Side inputs: tag={}, elem={}.", tag, elem);
+    //LOG.debug("Side inputs: tag={}, elem={}.", tag, elem);
 
     PCollectionView<?> sideInputView = sideInputTagToView.get(tag);
     sideInputHandler.addSideInputValue(sideInputView, elem);
@@ -278,7 +278,7 @@ class DoFnExecutor<InputT, OutputT> implements Executor {
           pushbackStateInternals.state(StateNamespaces.global(), pushedBackTag);
       if (pushedBackElements != null) {
         for (WindowedValue<InputT> elem : pushedBackElements.read()) {
-          LOG.debug("Process pushed back elem: {}", elem);
+          //LOG.debug("Process pushed back elem: {}", elem);
           runner.processElement(elem);
         }
         pushedBackElements.clear();

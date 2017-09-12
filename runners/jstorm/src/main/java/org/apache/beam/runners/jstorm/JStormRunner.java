@@ -26,6 +26,7 @@ import backtype.storm.topology.IRichBolt;
 import backtype.storm.topology.IRichSpout;
 import backtype.storm.topology.TopologyBuilder;
 import backtype.storm.tuple.Fields;
+import com.alibaba.jstorm.cache.KvStoreManagerFactory;
 import com.alibaba.jstorm.client.ConfigExtension;
 import com.alibaba.jstorm.cluster.StormConfig;
 import com.alibaba.jstorm.transactional.TransactionTopologyBuilder;
@@ -93,6 +94,12 @@ public class JStormRunner extends PipelineRunner<JStormRunnerResult> {
     Config config = new Config();
     if (options.getLocalMode()) {
       config.put(Config.STORM_CLUSTER_MODE, "local");
+      //config.put(ConfigExtension.KV_STORE_TYPE, KvStoreManagerFactory.KvStoreType.memory.toString());
+      config.put("task.msg.batch.size", 1000);
+      config.put(ConfigExtension.TOPOLOGY_BACKPRESSURE_ENABLE, true);
+      config.put(ConfigExtension.TOPOLOGY_BACKPRESSURE_WATER_MARK_HIGH, 0.3);
+      config.put(ConfigExtension.TOPOLOGY_BACKPRESSURE_WATER_MARK_LOW, 0.1);
+      //config.put("topology.metric.sample.rate", 1);
     } else {
       config.put(Config.STORM_CLUSTER_MODE, "distributed");
     }

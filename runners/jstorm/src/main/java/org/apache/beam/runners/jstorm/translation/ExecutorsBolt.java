@@ -348,7 +348,7 @@ public class ExecutorsBolt extends AbstractComponent implements IRichBatchBolt {
   }
 
   protected void emitOutsideBolt(TupleTag outputTag, WindowedValue outputValue) {
-    LOG.debug("Output outside: tag={}, value={}", outputTag, outputValue.getValue());
+    //LOG.debug("Output outside: tag={}, value={}", outputTag, outputValue.getValue());
     if (keyedEmit(outputTag.getId())) {
       KV kv = (KV) outputValue.getValue();
       byte[] immutableOutputValue = serializer.serialize(outputValue.withValue(kv.getValue()));
